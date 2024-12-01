@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Quiz of MHC-HNSLI-2017</title>
+  <style>
+     * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #fff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .quiz-container {
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      max-width: 400px;
+      width: 100%;
+      background: linear-gradient(75deg,rgba(1,1,190,0.8),rgba(1,1,160,0.6), rgba(20,20,120,0.5));
+    }
+
+    .quiz-container h1 {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .question {
+      font-size: 1.2em;
+      margin-bottom: 15px;
+      color: #2c3e50;
+    }
+
+    .options label {
+      display: block;
+      background: #f1f1f1;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid #bdc3c7;
+    }
+
+    .options label:hover {
+      background:linear-gradient(110deg, blue, #4cf);
+      color: #fff;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .options input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 1em;
+    }
+
+    .result h3,
+    .result h4 {
+      color: #34495e;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background: #3498db;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1em;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #2980b9;
+    }
+
+    button:disabled {
+      background: #bdc3c7;
+      cursor: not-allowed;
+    }
+
+    .restart {
+      background: #2ecc71;
+    }
+
+    .restart:hover {
+      background: #27ae60;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+      background: #ecf0f1;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 480px) {
+      .quiz-container {
+        padding: 15px;
+      }
+
+      .quiz-container h1 {
+        font-size: 1.2em;
+      }
+
+      .name {
+        float: right;
+      }
+    }
+
+    .tops {
+      margin-top: 0px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 3px;
+    }
+  </style>
+  </style>
+</head>
+<body>
+
+  <div class="quiz-container">
+      <div class="tops">
+    <button><a href="index2.html">home</a></button>
+    <h3>Quiz.</h3>
+  </div>
+    <h1>Quiz Applying 5s procedur</h1>
+    <p class="question" id="question"></p>
+    <div class="options" id="option"></div>
+    <div class="result" id="result"></div>
+    <div class="btn-container">
+      <button id="submit-btn" onclick="next()">Submit</button>
+      <button id="restart-btn" onclick="restart()" style="display: none;" class="restart">Restart</button>
+    </div>
+  <i class="name">by student Aklok Tilahun</i>
+  </div>
+
+  <script>
+    const questions = 
+
+[
+    {
+        "question": "What is the first step in the 5S process?",
+        "option": ["A, Set in Order", "B, Sort", "C, Shine"],
+        "correct": 1
+    },
+    {
+        "question": "Which of the following best describes 'Standardize'?",
+        "option": ["A, Creating a consistent approach", "B, Cleaning the workspace", "C, Organizing tools"],
+        "correct": 0
+    },
+    {
+        "question": "What is a key benefit of the 'Shine' step?",
+        "option": ["A, Increased clutter", "B, Improved safety", "C, More paperwork"],
+        "correct": 1
+    },
+    {
+        "question": "Which step of 5S is focused on visual management?",
+        "option": ["A, Sort", "B, Set in Order", "C, Sustain"],
+        "correct": 1
+    },
+    {
+        "question": "What is the main purpose of the 'Sort' step?",
+        "option": ["A, To clean the area", "B, To identify necessary items", "C, To standardize processes"],
+        "correct": 1
+    },
+    {
+        "question": "Which of the following is a tool used in the 5S process?",
+        "option": ["A, 5S audit checklist", "B, Financial report", "C, Marketing plan"],
+        "correct": 0
+    },
+    {
+        "question": "What does the 'Sustain' step require from employees?",
+        "option": ["A, Regular training", "B, Continuous improvement", "C, Increased workload"],
+        "correct": 1
+    },
+    {
+        "question": "Which of the following is a common challenge in implementing 5S?",
+        "option": ["A, Employee resistance", "B, Increased organization", "C, Improved efficiency"],
+        "correct": 0
+    },
+    {
+        "question": "What is the focus of the 'Set in Order' step?",
+        "option": ["A, Cleaning the workspace", "B, Arranging tools for easy access", "C, Removing unnecessary items"],
+        "correct": 1
+    },
+    {
+        "question": "Which step of 5S is about creating a clean and orderly environment?",
+        "option": ["A, Shine", "B, Sustain", "C, Standardize"],
+        "correct": 0
+    },
+    {
+        "question": "What is a common result of not standardizing processes in 5S?",
+        "option": ["A, Increased efficiency", "B, Disorganization", "C, Improved safety"],
+        "correct": 1
+    },
+    {
+        "question": "Which of the following is a key principle of the 5S methodology?",
+        "option": ["A, Waste elimination", "B, Increased complexity", "C, More paperwork"],
+        "correct": 0
+    },
+    {
+        "question": "What does 'Seiri' mean in the context of 5S?",
+        "option": ["A, Sort", "B, Sustain", "C, Shine"],
+        "correct": 0
+    },
+    {
+        "question": "Which step of 5S focuses on maintaining discipline and adherence to standards?",
+        "option": ["A, Sustain", "B, Standardize", "C, Set in Order"],
+        "correct": 0
+    },
+    {
+        "question": "What is the ultimate goal of the 5S methodology?",
+        "option": ["A, Increased waste", "B, Improved workplace efficiency", "C, More paperwork"],
+        "correct": 1
+    }
+];
+
+    let score = 0;
+    let currentQuestion = 0;
+    let userAnswers = [];
+
+    const outQuestion = document.querySelector('#question');
+    const outOption = document.querySelector('#option');
+    const outResult = document.querySelector('#result');
+    const submitBtn = document.querySelector('#submit-btn');
+    const restartBtn = document.querySelector('#restart-btn');
+
+    function display() {
+      if (currentQuestion >= questions.length) {
+        showFinalResult();
+        return;
+      }
+
+      // Display the current question
+      const questionData = questions[currentQuestion];
+      outQuestion.innerHTML = (currentQuestion + 1) + " ,"+ questionData.question;
+
+      // Display the options
+      const optionsHtml = questionData.option
+        .map((option, index) => 
+          `<label>
+            <input type="radio" name="answer" value="${index}">
+            ${option}
+          </label>`
+        )
+        .join('');
+      outOption.innerHTML = optionsHtml;
+
+      outResult.innerHTML = ""; // Clear previous result
+    }
+
+    function next() {
+      const selectedOption = document.querySelector('input[name="answer"]:checked');
+      if (!selectedOption) {
+        outResult.innerHTML = "<span style='color: red;'>Please select an answer!</span>";
+        return;
+      }
+
+      const answer = parseInt(selectedOption.value);
+      userAnswers.push({ 
+        question: questions[currentQuestion].question,
+        selected: answer,
+        correct: questions[currentQuestion].correct,
+        selectedOption: questions[currentQuestion].option[answer],
+        correctOption: questions[currentQuestion].option[questions[currentQuestion].correct]
+      });
+
+      if (answer === questions[currentQuestion].correct) {
+        score++;
+        outResult.innerHTML = "<span style='color: green;'>Correct!</span>";
+      } else {
+        outResult.innerHTML = "<span style='color: red;'>Wrong answer.</span>";
+      }
+
+      currentQuestion++;
+      display();
+    }
+
+    function showFinalResult() {
+      outQuestion.innerHTML = "Quiz completed!";
+      outOption.innerHTML = "";
+      outResult.innerHTML = `
+        <h3>Your final score is: ${score}/${questions.length}</h3>
+        <h4>Results:</h4>
+        <ul>
+          ${userAnswers.map(answer => `
+            <li>
+              <strong>Question:</strong> ${answer.question}<br>
+              <strong>Your Answer:</strong> ${answer.selectedOption || "No answer"}
+             ${answer.selected === answer.correct ? " ✔️" : " ❌"}
+            <br>
+              <strong>Correct Answer:</strong> ${answer.correctOption}
+            </li>
+          `).join('')}
+        </ul>
+      `;
+      submitBtn.style.display = "none";
+      restartBtn.style.display = "inline-block";
+    }
+
+    function restart() {
+      score = 0;
+      currentQuestion = 0;
+      userAnswers = [];
+      submitBtn.style.display = "inline-block";
+      restartBtn.style.display = "none";
+      display();
+    }
+
+    // Initial display
+    display();
+  </script>
+</body>
+</html>

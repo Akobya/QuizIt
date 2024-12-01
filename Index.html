@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+<style>
+body{
+  margin: 0;
+  color: #fff;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+button{
+  background-color: powderblue;
+  padding: 10px 23px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+}
+  section{
+    margin: 10px 12px;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgb(0, 120, 200);
+    display: none;
+  }
+  section .cont-top{
+    display: grid;
+    grid-auto-columns: 1fr;
+  }
+  .cont-top #drop{
+    text-decoration: none;
+    background: linear-gradient(53deg,rgb(0,100,200), powderblue);
+    padding: 8px;
+    margin: 4px 4px;
+    border-radius: 4px;
+    color: #fff;
+    box-shadow: 0 0 2px #fff;
+    font-size: 18px;
+  }
+.middle-area{
+  margin-top: 10%;
+  margin-left: 10px;
+}
+.middle-area p{
+  color: #fff;
+}
+nav{
+  display: none;
+}
+.nav-cont{
+ display: grid;
+ grid-template-columns:1fr;
+ background-color: #004d;
+ padding-right: 10px;
+ padding-bottom: 40px;
+max-width: 80%;
+}
+.nav-cont a{
+  text-decoration: none;
+  color: #003;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: lightblue;
+  padding: 8px;
+  margin: 8px;
+ 
+}
+.nav-bar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  padding: 7px;
+}
+.box{
+  box-shadow: 0 0 6px #ffd;
+  margin-top: 40px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 7px;
+  padding: 6px;
+  background: linear-gradient( blue,black);
+}
+.drop-menu{
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  display: none;
+}
+.drop-menu a{
+  color: #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 7px;
+  padding: 8px;
+  text-decoration: none;
+  font-size: 17px;
+  margin: 2px;
+  background: linear-gradient(lightblue,blue);
+}
+</style>
+</head>
+<body>
+  <div class="nav-bar">
+  <button onclick="more()">[[[</button>
+  <h2>QUIZ.</h2>
+  </div>
+  <nav>
+    <div class="nav-cont">
+      <a href=""></a>
+      <a href=""></a>
+      <a href="">E</a>
+      <a href="">comming soon</a>
+    </div>
+  </nav>
+<div class="middle-area">
+ <p> Hy there this page is for you to prepar for exam merrihelp level one  <br>
+<em>prepar by student Aklok T. </em></p><br>
+   <button onclick="popup()">get quiz</button>
+
+</div>
+  <section>
+    <div class="cont-top">
+      <button id="drop" onclick="dropMotor()">applying 5s Procedur
+     <div class="drop-menu">
+      <a href="applyingI.html">Exam I 7 question</a>
+      <a href="quizAppying2.html">Exam II 15 question</a>
+      <a href="QuizApply.html">Exam III 25 question</a>
+      <a href="">comming soon</a>
+      </div>
+       </button>
+      <button id="drop">hardware and software preferial coomming soon</button>
+      <button id="drop">keyboard tayping comming soon</button>
+    </div>
+  </section>
+  <div class="box">
+    <ul>
+      <h3>Service</h3>
+      <li>quiz for tvt student</li>
+      <li>new service as soon as</li>
+      <li>new service as soon as</li>  
+      <li>new service as soon as</li>
+    </ul>
+  </div>
+  <div class="box">
+    <ul>
+      <h3>vission</h3>
+      <li>quiz for tvt student</li>
+      <li>new service as soon as</li>
+      <li>new service as soon as</li>  
+      <li>new service as soon as</li>
+    </ul>
+  </div>
+  </body>
+<script>
+function dropMotor(){
+    const popups = document.querySelector('.drop-menu')
+    
+  if(popups.style.display === "flex"){
+      popups.style.display = "none"
+    }else{
+      popups.style.display = "flex"
+    }
+  }
+  function more(){
+    const popups = document.querySelector('nav')
+    
+  if(popups.style.display === "block"){
+      popups.style.display = "none"
+    }else{
+      popups.style.display = "block"
+    }
+  }
+  function popup(){
+    const popups = document.querySelector('section')
+    
+    if(popups.style.display === "block"){
+      popups.style.display = "none"
+    }else{
+      popups.style.display = "block"
+    }
+  }
+</script>
+</html>
