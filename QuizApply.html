@@ -6,7 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Quiz of MHC-HNSLI-2017</title>
   <style>
-    * {
+    
+
+  
+             * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -52,7 +55,7 @@ background: linear-gradient(40deg, blue,black);
     .options label {
       color: #fff;
       display: block;
-      background: blue;
+      background: linear-gradient(rgb(100 100 170),black);
       margin: 8px 0;
       padding: 10px;
       border-radius: 5px;
@@ -61,10 +64,11 @@ background: linear-gradient(40deg, blue,black);
     }
 
     .options label:hover {
-      background: linear-gradient(rgb(0 56 150),black);
+      text-shadow: 0 0 7px #000;
+      background: linear-gradient(rgb(50 50 160),lightblue);
       -webkit-box-shadow: 0 0 10px #fff;
-      -moz-box-shadow: 0 0 8px #fff;
-      box-shadow: 0 0 7px #fff;
+      -moz-box-shadow: 0 0 10px #fff;
+      box-shadow: 0 0 10px #fff;
     }
 
     .options input[type="radio"] {
@@ -90,8 +94,8 @@ background: linear-gradient(40deg, blue,black);
       padding: 10px 15px;
       border: none;
       border-radius: 5px;
-      background: #007bff;
-      color: #fff;
+      background: lightblue;
+      color: #000;
       cursor: pointer;
       font-size: 1em;
       transition: all 0.3s;
@@ -141,11 +145,11 @@ background: linear-gradient(40deg, blue,black);
       }
     }
     .tops{
-      margin-top: 0px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin: 3px;
+      margin: 6px;
+      color: #fff;
     }
   </style>
 </head>
