@@ -82,13 +82,13 @@ max-width: 80%;
   padding: 6px;
   background: linear-gradient( blue,black);
 }
-.drop-menu{
+.drop-menu,.drop-menu-two{
   margin-top: 8px;
   display: flex;
   flex-direction: column;
   display: none;
 }
-.drop-menu a{
+.drop-menu a, .drop-menu-two a{
   color: #fff;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -122,7 +122,7 @@ max-width: 80%;
 </div>
   <section>
     <div class="cont-top">
-      <button id="drop" onclick="dropMotor()">applying 5s Procedur
+      <button id="drop" onclick="dropMotor('.drop-menu')">applying 5s Procedur
      <div class="drop-menu">
       <a href="applyingI.html">Exam I 7 question</a>
       <a href="quizAppying2.html">Exam II 15 question</a>
@@ -130,8 +130,8 @@ max-width: 80%;
       <a href="">comming soon</a>
       </div>
        </button>
-      <button id="drop">connecte hardware preferialis 
-      <div class="drop-menu">
+      <button onclick="dropMotor('.drop-menu-two')" id="drop">connecte hardware preferialis 
+      <div class="drop-menu-two">
       <a href="QuizConnect.html">Exam I 20 question</a>
       <a href="">comming soon</a>
       </div>
@@ -159,8 +159,8 @@ max-width: 80%;
   </div>
   </body>
 <script>
-function dropMotor(){
-    const popups = document.querySelector('.drop-menu')
+function dropMotor(values){
+    const popups = document.querySelector(values)
     
   if(popups.style.display === "flex"){
       popups.style.display = "none"
