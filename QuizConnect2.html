@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Quiz of MHC-HNSLI-2017</title>
+  <style>
+         * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .quiz-container {
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 400px;
+      width: 100%;
+      -webkit-box-shadow: 0 0 10px #fff;
+background: linear-gradient(40deg, blue,black);
+    }
+
+
+    .quiz-container h1 {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #fff;
+      text-shadow: 0 0 2px black;
+    }
+
+    .question {
+      font-size: 1.2em;
+      margin-bottom: 15px;
+      color: #fff;
+      text-shadow: 0 0 2px black;
+    }
+
+    .options label {
+      color: #fff;
+      display: block;
+      background: linear-gradient(rgb(100 100 170),black);
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .options label:hover {
+      text-shadow: 0 0 7px #000;
+      background: linear-gradient(rgb(50 50 160),lightblue);
+      -webkit-box-shadow: 0 0 10px #fff;
+      -moz-box-shadow: 0 0 10px #fff;
+      box-shadow: 0 0 10px #fff;
+    }
+
+    .options input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 1em;
+      color: #555;
+    }
+   .result h3,h4{
+     color: #fff;
+      text-shadow: 0 0 2px black;
+   }
+    .btn-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background: lightblue;
+      color: #000;
+      cursor: pointer;
+      font-size: 1em;
+      transition: all 0.3s;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    button:disabled {
+      background: #cccccc;
+      cursor: not-allowed;
+    }
+
+    .restart {
+      background: #28a745;
+    }
+
+    .restart:hover {
+      background: #218838;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 480px) {
+      .quiz-container {
+        padding: 15px;
+      }
+
+      .quiz-container h1 {
+        font-size: 1.2em;
+      }
+      .name{
+        float: right;
+      }
+    }
+    .tops{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 6px;
+      color: #fff;
+    }
+  </style>
+  </style>
+</head>
+<body>
+
+  <div class="quiz-container">
+      <div class="tops">
+    <button><a href="index.html">home</a></button>
+    <h3>Quiz.</h3>
+  </div>
+    <h1>Connecting Hardware Peripherals</h1>
+    <p class="question" id="question"></p>
+    <div class="options" id="option"></div>
+    <div class="result" id="result"></div>
+    <div class="btn-container">
+      <button id="submit-btn" onclick="next()">Submit</button>
+      <button id="restart-btn" onclick="restart()" style="display: none;" class="restart">Restart</button>
+    </div>
+  <i class="name">by student Aklok Tilahun</i>
+  </div>
+
+  <script>
+    const questions = 
+
+[
+  {
+    "question": "Which of the following devices is used for displaying visual output?",
+    "option": ["A. Keyboard", "B. Monitor", "C. Scanner", "D. Microphone"],
+    "correct": 1
+  },
+  {
+    "question": "What type of device is a keyboard?",
+    "option": ["A. Output Device", "B. Input Device", "C. Storage Device", "D. Network Device"],
+    "correct": 1
+  },
+  {
+    "question": "Which of the following is an example of an output device?",
+    "option": ["A. Mouse", "B. Monitor", "C. Scanner", "D. Webcam"],
+    "correct": 1
+  },
+  {
+    "question": "What is the primary function of a scanner?",
+    "option": ["A. To print documents", "B. To digitize images", "C. To store data", "D. To connect to the internet"],
+    "correct": 1
+  },
+  {
+    "question": "Which device is used to capture sound?",
+    "option": ["A. Microphone", "B. Monitor", "C. Printer", "D. Webcam"],
+    "correct": 0
+  },
+  {
+    "question": "What does a device driver do?",
+    "option": ["A. Increases the speed of the computer", "B. Allows the computer to communicate with peripheral devices", "C. Stores data", "D. Connects to the internet"],
+    "correct": 1
+  },
+  {
+    "question": "Which of the following is NOT a type of input device?",
+    "option": ["A. Keyboard", "B. Mouse", "C. Speaker", "D. Scanner"],
+    "correct": 2
+  },
+  {
+    "question": "What type of device is a webcam?",
+    "option": ["A. Input Device", "B. Output Device", "C. Storage Device", "D. Network Device"],
+    "correct": 0
+  },
+  {
+    "question": "Which of the following is a type of internal storage device?",
+    "option": ["A. USB Flash Drive", "B. Hard Disk Drive", "C. Monitor", "D. External Hard Drive"],
+    "correct": 1
+  },
+  {
+    "question": "What is the function of a printer?",
+    "option": ["A. To input data", "B. To output data", "C. To store data", "D. To process data"],
+    "correct": 1
+  },
+  {
+    "question": "Which of the following devices is used for displaying visual output?",
+    "option": ["A. Keyboard", "B. Monitor", "C. Scanner", "D. Microphone"],
+    "correct": 1
+  },
+  {
+    "question": "What type of device is a joystick?",
+    "option": ["A. Input Device", "B. Output Device", "C. Storage Device", "D. Network Device"],
+    "correct": 0
+  },
+  {
+    "question": "Which of the following is an example of a storage device?",
+    "option": ["A. Monitor", "B. Printer", "C. Hard Drive", "D. Keyboard"],
+    "correct": 2
+  },
+  {
+    "question": "What is the main purpose of a mouse?",
+    "option": ["A. To print documents", "B. To navigate the computer interface", "C. To store data", "D. To capture sound"],
+    "correct": 1
+  },
+  {
+    "question": "Which device is primarily used for inputting text?",
+    "option": ["A. Monitor", "B. Keyboard", "C. Printer", "D. Speaker"],
+    "correct": 1
+  },
+  {
+    "question": "What type of device is a digital camera?",
+    "option": ["A. Input Device", "B. Output Device", "C. Storage Device", "D. Network Device"],
+    "correct": 0
+  },
+  {
+    "question": "Which of the following is an example of a network device?",
+    "option": ["A. Router", "B. Monitor", "C. Keyboard", "D. Printer"],
+    "correct": 0
+  },
+  {
+    "question": "What is the function of a graphics card?",
+    "option": ["A. To process sound", "B. To enhance video output", "C. To store data", "D. To connect peripherals"],
+    "correct": 1
+  },
+  {
+    "question": "Which of the following is a common type of external storage?",
+    "option": ["A. RAM", "B. SSD", "C. USB Flash Drive", "D. CPU"],
+    "correct": 2
+  },
+  {
+    "question": "What type of device is a touchscreen?",
+    "option": ["A. Input Device", "B. Output Device", "C. Both A and B", "D. None of the above"],
+    "correct": 2
+  },
+  {
+    "question": "Which device is used to connect a computer to a network?",
+    "option": ["A. Modem", "B. Monitor", "C. Printer", "D. Keyboard"],
+    "correct": 0
+  },
+  {
+    "question": "What is the purpose of a power supply unit?",
+    "option": ["A. To store data", "B. To provide power to the computer", "C. To process information", "D. To connect peripherals"],
+    "correct": 1
+  },
+  {
+    "question": "Which of the following is a type of portable storage device?",
+    "option": ["A. Hard Drive", "B. USB Flash Drive", "C. SSD", "D. All of the above"],
+    "correct": 3
+  },
+  {
+    "question": "What type of device is a graphics tablet?",
+    "option": ["A. Input Device", "B. Output Device", "C. Storage Device", "D. Network Device"],
+    "correct": 0
+  },
+  {
+    "question": "Which of the following devices is used for audio output?",
+    "option": ["A. Microphone", "B. Speaker", "C. Scanner", "D. Keyboard"],
+    "correct": 1
+  },
+  {
+    "question": "What is the function of a network switch?",
+    "option": ["A. To connect multiple devices on a network", "B. To store data", "C. To process information", "D. To provide power"],
+    "correct": 0
+  }
+];
+
+    let score = 0;
+    let currentQuestion = 0;
+    let userAnswers = [];
+
+    const outQuestion = document.querySelector('#question');
+    const outOption = document.querySelector('#option');
+    const outResult = document.querySelector('#result');
+    const submitBtn = document.querySelector('#submit-btn');
+    const restartBtn = document.querySelector('#restart-btn');
+
+    function display() {
+      if (currentQuestion >= questions.length) {
+        showFinalResult();
+        return;
+      }
+
+      // Display the current question
+      const questionData = questions[currentQuestion];
+      outQuestion.innerHTML = (currentQuestion + 1) + " ,"+ questionData.question;
+
+      // Display the options
+      const optionsHtml = questionData.option
+        .map((option, index) => 
+          `<label>
+            <input type="radio" name="answer" value="${index}">
+            ${option}
+          </label>`
+        )
+        .join('');
+      outOption.innerHTML = optionsHtml;
+
+      outResult.innerHTML = ""; // Clear previous result
+    }
+
+    function next() {
+      const selectedOption = document.querySelector('input[name="answer"]:checked');
+      if (!selectedOption) {
+        outResult.innerHTML = "<span style='color: red;'>Please select an answer!</span>";
+        return;
+      }
+
+      const answer = parseInt(selectedOption.value);
+      userAnswers.push({ 
+        question: questions[currentQuestion].question,
+        selected: answer,
+        correct: questions[currentQuestion].correct,
+        selectedOption: questions[currentQuestion].option[answer],
+        correctOption: questions[currentQuestion].option[questions[currentQuestion].correct]
+      });
+
+      if (answer === questions[currentQuestion].correct) {
+        score++;
+        outResult.innerHTML = "<span style='color: green;'>Correct!</span>";
+      } else {
+        outResult.innerHTML = "<span style='color: red;'>Wrong answer.</span>";
+      }
+
+      currentQuestion++;
+      display();
+    }
+
+    function showFinalResult() {
+      outQuestion.innerHTML = "Quiz completed!";
+      outOption.innerHTML = "";
+      outResult.innerHTML = `
+        <h3>Your final score is: ${score}/${questions.length}</h3>
+        <h4>Results:</h4>
+        <ul>
+          ${userAnswers.map(answer => `
+            <li>
+              <strong>Question:</strong> ${answer.question}<br>
+              <strong>Your Answer:</strong> ${answer.selectedOption || "No answer"}
+             ${answer.selected === answer.correct ? " ✔️" : " ❌"}
+            <br>
+              <strong>Correct Answer:</strong> ${answer.correctOption}
+            </li>
+          `).join('')}
+        </ul>
+      `;
+      submitBtn.style.display = "none";
+      restartBtn.style.display = "inline-block";
+    }
+
+    function restart() {
+      score = 0;
+      currentQuestion = 0;
+      userAnswers = [];
+      submitBtn.style.display = "inline-block";
+      restartBtn.style.display = "none";
+      display();
+    }
+
+    // Initial display
+    display();
+  </script>
+</body>
+</html>
