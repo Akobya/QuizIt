@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Matching Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .quiz {
+            margin-bottom: 20px;
+            background:linear-gradient(40deg,#052182f8,#020d34f8);
+            padding: 10px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 10px;
+            text-shadow: 0 0 2px #000;
+            color: #ffff;
+        }
+        .question {
+            margin: 10px 0;
+        }
+        button{
+          background: linear-gradient(#0ff4ecf8,#0fc0f4f8);
+          padding: 8px 18px;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+          border-radius: 5px;
+          font-size: 17px;
+        }
+    </style>
+</head>
+<body>
+    <h1>connect hardware peripheral Quiz</h1>
+    <h3>Say true or false.</h3>
+
+    <div class="quiz">
+        <div class="question">
+          
+            <select id="q1">
+                <option value="">nop Select</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+            </select>
+              <label>1. Peripheral devices are only used for input purposes in a computer system.</label>
+        </div>
+        <div class="question">
+            
+            <select id="q2">
+                <option value="">no Select</option>
+                <option value="true">true</option>
+                <option value="value">false</option>
+            </select>
+            <label>2, A device driver is essential for the operating system to communicate with peripheral devices</label>
+        </div>
+        <div class="question">
+          
+            <select id="q3">
+                <option value="">nobSelect</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+            </select>
+              <label>3. All peripheral devices can be connected to any computer without compatibility issues.</label>
+        </div>
+        <div class="question">
+           
+            <select id="q4">
+                <option value="">no Select</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+            </select>
+             <label>4. The process of validating delivered physical components includes checking the packing list against the received items.</label>
+        </div>
+        <div class="question">
+           
+            <select id="q5">
+                <option value="">not select</option>
+                <option value="true">True</option>
+                <option value="false">false</option>
+            </select>
+             <label>5. A scanner's resolution does not affect the quality of the scanned images.</label>
+        </div>
+         <div class="question">
+            <select id="q6">
+                <option value="">not select</option>
+                <option value="true">True</option>
+                <option value="false">false</option>
+            </select>
+             <label>6. The organization’s standards and guidelines should not influence the selection of peripheral devices</label>
+        </div>
+ <div class="question">
+            <select id="q7">
+                <option value="">not select</option>
+                <option value="true">True</option>
+                <option value="false">false</option>
+            </select>
+             <label>7. Peripheral devices can be categorized into input, output, and storage devices.</label>
+        </div>
+ <div class="question">
+            <select id="q8">
+                <option value="">not select</option>
+                <option value="true">True</option>
+                <option value="false">false</option>
+            </select>
+             <label>8. It is important to test all functionalities of a peripheral device before it is used in a client environment.</label>
+        </div>
+          <button onclick="checkAnswers()">Submit</button>
+    </div>
+ 
+    </div>
+
+    <p id="result"></p>
+
+    <script>
+      var contOut = ""
+        function checkAnswers() {
+            const answers = {
+                q1: 'false',
+                q2: 'true',
+                q3: 'false', 
+                q4: 'true', 
+                q5: 'false',
+                q6: 'false',
+                q7: 'true',
+                q8: 'true'
+            };
+
+            let score = 0;
+      
+            for (const [key, value] of Object.entries(answers)) {
+              
+                const userAnswer = document.getElementById(key).value;
+          
+                if (userAnswer === value){
+                    score++;
+                }
+            }
+ 
+            alert( `You scored ${score} out of 8.`);
+        }
+      
+      
+    </script>
+</body>
+</html>
