@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Quiz Application</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      text-align: center;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+    .out {
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+    select {
+      padding: 5px;
+      font-size: 16px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px 5px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #007bff;
+      color: #fff;
+    }
+    .results {
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #007bff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+   <h3><i>by student Aklok T.</i></h3>
+    <div class="out"></div>
+    <button onclick="sub()">Submit</button>
+    <button onclick="reset()">Reset</button>
+    <div class="results"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: '1. Software is classified into two broad classes: operating system software and application software. <br> <select class="seles"><option value="true">true</option><option value="false">false</option>',
+        answer: 'true',
+        disc: 'def: This classification is fundamental in software inventory management.'
+      },
+      {
+        question: '2.Application software can run on any operating system without restrictions <select class="seles"><option value="true">true</option><option value="false">false</option>',
+        answer: 'false',
+        disc: 'Application software is often designed for specific operating systems.'
+      },
+      {
+question: '3.The "Software by Manufacturer" report lists the total number of copies installed based on their vendors. <select class="seles"><option value="true">true</option><option value="false">false</option>',
+answer: 'true',
+disc: 'This report provides details on software installations by vendor'
+},
+{
+  question: '4. The "Recently Installed Software" report includes software that has been uninstalled. <select class="seles"><option value="true">true</option><option value="false">false</option>',
+answer: 'false',
+disc: 'This report only lists software that has been recently installed'
+},{
+  question: '5. Software usage statistics can help determine whether to renew licenses <select class="seles"><option value="true">true</option><option value="false">false</option>',
+answer: 'true',
+disc: 'Usage statistics inform decisions on license renewals.'
+},
+{
+  question: '6. The "Licensed To" field indicates the company or person to whom the software is licensed. <select class="seles"><option value="true">true</option><option value="false">false</option>',
+answer: 'true',
+disc: 'This field is crucial for tracking software ownership.'
+},
+{
+  question: '7. License expiry dates are irrelevant for maintaining software inventory. <select class="seles"><option value="true">true</option><option value="false">false</option>',
+answer: 'false',
+disc: 'Expiry dates are important for ensuring compliance and timely renewals.'
+},
+{
+  question: '8. Different versions of application software may offer improved features. <select class="seles"><option value="true">true</option><option value="false">false</option>',
+answer: 'true',
+disc: 'New versions often include enhancements and new functionalities'
+},
+{
+  question: '9. The software inventory can be filtered by software type, access type, or license.<select class="seles"><option value="true">true</option><option value="false">false</option>',
+answer: 'true',
+disc: 'Filtering helps in managing and organizing software effectively.'
+},
+{
+  question: '10. Microsoft Office XP can run on a Linux platform without any additional software <select class="seles"><option value="true">true</option><option value="false">false</option>',
+answer: 'false',
+disc: 'requires a Windows emulator to run on Linux.'
+},
+{
+  question: '11.Maintaining a software inventory is not necessary for compliance purposes <select class="seles"><option value="true">true</option><option value="false">false</option>',
+answer: 'false',
+disc: 'A software inventory is essential for compliance and audits.'
+},
+{
+  question: '12. The "Software Product Keys" report is used to track the keys used for software installation.<select class="seles"><option value="true">true</option><option value="false">false</option>',
+answer: 'true',
+disc: 'This report helps in managing software licenses'
+},
+{
+  question: '13. User documentation is not important for software maintenance. <select class="seles"><option value="true">true</option><option value="false">false</option>',
+answer: 'false',
+disc: 'Documentation is vital for understanding and using software effectively.'
+}
+    ];
+  
+    let current = 0;
+    let score = 0;
+    const outResult = document.querySelector('.results');
+    const outPut = document.querySelector('.out');
+
+    function display() {
+      if (current < questions.length) {
+        outPut.innerHTML = questions[current].question;
+      } else {
+        outResult.innerHTML = `Quiz Completed! Your final score is ${score}/${questions.length}`;
+      }
+    }
+
+    function reset() {
+      current = 0;
+      score = 0;
+      outResult.innerHTML = '';
+      display();
+    }
+
+    function sub() {
+      const selected = document.querySelector('.seles').value;
+
+      if (questions[current].answer === selected) {
+        score++;
+        outResult.innerHTML = 'Correct!';
+      } else {
+        outResult.innerHTML = `Incorrect! ${questions[current].disc}`;
+      }
+
+      current++;
+      display();
+    }
+
+    display();
+  </script>
+</body>
+</html>
