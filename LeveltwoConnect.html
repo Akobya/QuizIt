@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Quiz of MHC-HNSLI-2017</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .quiz-container {
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 400px;
+      width: 100%;
+      -webkit-box-shadow: 0 0 10px #fff;
+background: linear-gradient(40deg, blue,black);
+    }
+
+
+    .quiz-container h1 {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #fff;
+      text-shadow: 0 0 2px black;
+    }
+
+    .question {
+      font-size: 1.2em;
+      margin-bottom: 15px;
+      color: #fff;
+      text-shadow: 0 0 2px black;
+    }
+
+    .options label {
+      color: #fff;
+      display: block;
+      background: linear-gradient(rgb(100 100 170),black);
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .options label:hover {
+      text-shadow: 0 0 7px #000;
+      background: linear-gradient(rgb(50 50 160),lightblue);
+      -webkit-box-shadow: 0 0 10px #fff;
+      -moz-box-shadow: 0 0 10px #fff;
+      box-shadow: 0 0 10px #fff;
+    }
+
+    .options input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 1em;
+      color: #555;
+    }
+   .result h3,h4{
+     color: #fff;
+      text-shadow: 0 0 2px black;
+   }
+    .btn-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background: lightblue;
+      color: #000;
+      cursor: pointer;
+      font-size: 1em;
+      transition: all 0.3s;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    button:disabled {
+      background: #cccccc;
+      cursor: not-allowed;
+    }
+
+    .restart {
+      background: #28a745;
+    }
+
+    .restart:hover {
+      background: #218838;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 480px) {
+      .quiz-container {
+        padding: 15px;
+      }
+
+      .quiz-container h1 {
+        font-size: 1.2em;
+      }
+      .name{
+        float: right;
+      }
+    }
+    .tops{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 6px;
+      color: #fff;
+    }
+  
+  </style>
+</head>
+<body>
+
+  <div class="quiz-container">
+      <div class="tops">
+    <button><a href="index.html">home</a></button>
+    <h3>Quiz.</h3>
+  </div>
+    <h1>Quiz Applying 5s procedur</h1>
+    <p class="question" id="question"></p>
+    <div class="options" id="option"></div>
+    <div class="result" id="result"></div>
+    <div class="btn-container">
+      <button id="submit-btn" onclick="next()">Submit</button>
+      <button id="restart-btn" onclick="restart()" style="display: none;" class="restart">Restart</button>
+    </div>
+  <i class="name">by student Aklok Tilahun</i>
+  </div>
+
+  <script>
+    const questions = [
+  {
+    "question": "What is the main goal of connecting internal hardware components in Unit 1?",
+    "option": ["A. To install software", "B. To ensure hardware functionality", "C. To evaluate vendor performance"],
+    "correct": 1
+}
+, {
+    "question": "What must be clarified when identifying user hardware requirements?",
+    "option": ["A. Software preferences", "B. User needs according to organizational guidelines", "C. Vendor availability"],
+    "correct": 1
+}
+,{
+    "question": "Who is typically responsible for evaluating user component requirements?",
+    "option": ["A. The end user", "B. An appropriate person in the organization", "C. The hardware supplier"],
+    "correct": 1
+}
+, {
+    "question": "What is a key aspect of organizational guidelines mentioned in Unit 2?",
+    "option": ["A. Software licensing", "B. Hardware compatibility and characteristics", "C. Customer feedback analysis"],
+    "correct": 1
+}
+,{
+    "question": "What does the term 'organizational guidelines' impact in hardware selection?",
+    "option": ["A. Software updates", "B. Hardware choices", "C. Employee training"],
+    "correct": 1
+}
+, {
+    "question": "Which role is NOT typically part of the line of authority for hardware decisions?",
+    "option": ["A. Technician", "B. Business manager", "C. Software developer"],
+    "correct": 2
+}
+,{
+    "question": "What should be done after establishing user hardware requirements?",
+    "option": ["A. Consult the correct people per guidelines", "B. Install the hardware immediately", "C. Ignore budget constraints"],
+    "correct": 0
+}
+,{
+    "question": "Why is it necessary to document the hardware acquisition process?",
+    "option": ["A. To increase costs", "B. To ensure accountability and traceability", "C. To delay installation"],
+    "correct": 1
+}
+,{
+    "question": "What happens if a hardware request is not covered by warranty?",
+    "option": ["A. It is automatically denied", "B. Someone with authority must approve it", "C. The technician decides alone"],
+    "correct": 1
+}
+,{
+    "question": "What is a potential solution if budget constraints delay hardware repairs?",
+    "option": ["A. Use credit or borrowed funds", "B. Wait for external funding", "C. Replace all hardware"],
+    "correct": 0
+}
+,{
+    "question": "Why is employee productivity a priority in hardware repairs?",
+    "option": ["A. To reduce vendor costs", "B. To ensure work continuity", "C. To improve software performance"],
+    "correct": 1
+}
+, {
+    "question": "What is the purpose of seeking the best price and quality from suppliers?",
+    "option": ["A. To maximize organizational profit", "B. To ensure value for money", "C. To delay the process"],
+    "correct": 1
+}
+, {
+    "question": "How many quotes might be obtained to ensure the best hardware deal?",
+    "option": ["A. One", "B. A number from multiple suppliers", "C. None"],
+    "correct": 1
+}
+, {
+    "question": "What is the role of a Hardware Register in an organization?",
+    "option": ["A. To track software licenses", "B. To record hardware details", "C. To manage employee schedules"],
+    "correct": 1
+}
+,{
+    "question": "Which form helps formalize communication about hardware needs?",
+    "option": ["A. Hardware Job Request Form", "B. Software Update Log", "C. Customer Survey"],
+    "correct": 0
+}
+,{
+    "question": "What should a technician avoid worrying about in this unit?",
+    "option": ["A. Hardware compatibility", "B. Organizational cash flow problems", "C. User requirements"],
+    "correct": 1
+}
+, {
+    "question": "What is a benefit of upgrading hardware like a hard drive?",
+    "option": ["A. Reduced documentation", "B. Increased capacity and speed", "C. Lower vendor interaction"],
+    "correct": 1
+}
+,{
+    "question": "What should be communicated when proposing a hardware change?",
+    "option": ["A. The cost only", "B. The benefits of the change", "C. The installation time"],
+    "correct": 1
+}
+, {
+    "question": "What is included in the Hardware Register table?",
+    "option": ["A. Employee names", "B. Examples of hardware types", "C. Software versions"],
+    "correct": 1
+}
+,{
+    "question": "Who prepares the Hardware Job Request Form?",
+    "option": ["A. The vendor", "B. The technician or requester", "C. The end user"],
+    "correct": 1
+}
+,{
+    "question": "What is a key field in the Hardware Job Request Form?",
+    "option": ["A. Hardware Change Details", "B. Software License Key", "C. Employee Salary"],
+    "correct": 0
+}
+,{
+    "question": "Why is record-keeping important in hardware management?",
+    "option": ["A. To ensure data is up-to-date and retrievable", "B. To increase hardware costs", "C. To reduce vendor contact"],
+    "correct": 0
+}
+, {
+    "question": "What should a technician focus on when identifying hardware needs?",
+    "option": ["A. Organizational guidelines", "B. Personal preferences", "C. Vendor advertisements"],
+    "correct": 0
+}
+, {
+    "question": "What is the next step after recording user component requirements?",
+    "option": ["A. Pass them to the appropriate person", "B. Install the hardware", "C. Contact the vendor directly"],
+    "correct": 0
+}
+, {
+    "question": "What does compatibility refer to in hardware selection?",
+    "option": ["A. Software updates", "B. How hardware works with other hardware", "C. Employee training needs"],
+    "correct": 1
+}
+,{
+    "question": "Who might a technician report to in the line of authority?",
+    "option": ["A. A supervisor", "B. A customer", "C. A software engineer"],
+    "correct": 0
+}
+, {
+    "question": "What is a common outcome documented in the acquisition process?",
+    "option": ["A. Software installation", "B. Final hardware selection", "C. Employee feedback"],
+    "correct": 1
+}
+, {
+    "question": "Why might an organization prioritize fixing hardware issues?",
+    "option": ["A. To avoid employee downtime", "B. To increase vendor profits", "C. To delay upgrades"],
+    "correct": 0
+}
+,{
+    "question": "What should be considered when seeking supplier quotes?",
+    "option": ["A. Price, quality, and service", "B. Software compatibility only", "C. Employee preferences"],
+    "correct": 0
+}
+,{
+    "question": "What is the purpose of the 'Purpose' column in the Hardware Register?",
+    "option": ["A. To list software uses", "B. To describe the hardware’s function", "C. To track employee usage"],
+    "correct": 1
+}
+, {
+    "question": "What is a benefit of formalized communication in an organization?",
+    "option": ["A. Reduced hardware costs", "B. Improved record-keeping", "C. Faster software updates"],
+    "correct": 1
+}
+, {
+    "question": "What should a hardware replacement request highlight?",
+    "option": ["A. Added value to the organization", "B. Increased costs only", "C. Vendor preferences"],
+    "correct": 0
+},
+{
+    "question": "What is the technician’s role in vendor selection?",
+    "option": ["A. To make the final decision", "B. To provide input based on user needs", "C. To ignore organizational guidelines"],
+    "correct": 1
+}
+, {
+    "question": "What might happen if hardware issues are not addressed?",
+    "option": ["A. Improved productivity", "B. Employee inability to work", "C. Reduced documentation"],
+    "correct": 1
+}
+, {
+    "question": "What is a key characteristic of hardware listed in the Hardware Register?",
+    "option": ["A. Cost", "B. Technical specifications", "C. Employee feedback"],
+    "correct": 1
+}
+,{
+    "question": "Why is it unnecessary for a technician to handle cash flow issues?",
+    "option": ["A. It’s outside their role", "B. They lack training", "C. It delays hardware installation"],
+    "correct": 0
+}
+,{
+    "question": "What does the Hardware Job Request Form track?",
+    "option": ["A. Software updates", "B. Hardware tasks and changes", "C. Customer complaints"],
+    "correct": 1
+}
+,{
+    "question": "What is a potential benefit of a larger hard drive replacement?",
+    "option": ["A. Reduced compatibility", "B. Better speed and capacity", "C. Increased costs only"],
+    "correct": 1
+}
+, {
+    "question": "Who evaluates vendor options after requirements are passed on?",
+    "option": ["A. The technician", "B. An appropriate person", "C. The end user"],
+    "correct": 1
+}
+, {
+    "question": "What should organizational guidelines ensure about hardware?",
+    "option": ["A. It meets user needs and compatibility", "B. It is the cheapest option", "C. It delays installation"],
+    "correct": 0
+}
+,{
+    "question": "What is a key step before acquiring new hardware?",
+    "option": ["A. Consulting the correct people", "B. Installing old hardware", "C. Ignoring user needs"],
+    "correct": 0
+}
+,{
+    "question": "What might an organization do if a hardware issue persists?",
+    "option": ["A. Borrow money to fix it", "B. Ignore it indefinitely", "C. Replace all systems"],
+    "correct": 0
+}
+, {
+    "question": "Why is getting multiple supplier quotes beneficial?",
+    "option": ["A. It ensures the lowest price only", "B. It balances price, quality, and service", "C. It delays the process"],
+    "correct": 1
+}
+,{
+    "question": "What does the Hardware Register help retrieve?",
+    "option": ["A. Software licenses", "B. Hardware data", "C. Employee records"],
+    "correct": 1
+}
+,{
+    "question": "What is a key feature of the Hardware Job Request Form?",
+    "option": ["A. Technical Specifications", "B. Software Updates", "C. Employee Benefits"],
+    "correct": 0
+}
+,{
+    "question": "What should a technician avoid when proposing hardware changes?",
+    "option": ["A. Focusing on benefits", "B. Focusing only on costs", "C. Consulting guidelines"],
+    "correct": 1
+}
+, {
+    "question": "What is the purpose of the 'Category' column in the Hardware Register?",
+    "option": ["A. To group hardware types", "B. To list employee roles", "C. To track software"],
+    "correct": 0
+}
+
+,{
+    "question": "What should be done with a completed Hardware Job Request Form?",
+    "option": ["A. File it without action", "B. Discuss it with a supervisor", "C. Send it to the end user"],
+    "correct": 1
+}
+, {
+    "question": "Why is hardware compatibility important?",
+    "option": ["A. To ensure it works with other components", "B. To reduce costs only", "C. To speed up software"],
+    "correct": 0
+}
+, {
+    "question": "What might a supervisor do with a hardware request?",
+    "option": ["A. Approve or deny it", "B. Install the hardware", "C. Ignore it"],
+    "correct": 0
+}
+, {
+    "question": "What is a potential consequence of not fixing hardware issues?",
+    "option": ["A. Increased productivity", "B. Employee downtime", "C. Reduced costs"],
+    "correct": 1
+}
+,{
+    "question": "What does the 'Examples of different types' column in the Hardware Register show?",
+    "option": ["A. Software versions", "B. Variations of hardware devices", "C. Employee preferences"],
+    "correct": 1
+}
+,{
+    "question": "What is a key responsibility of the technician in Unit 2?",
+    "option": ["A. Managing finances", "B. Identifying user hardware needs", "C. Approving budgets"],
+    "correct": 1
+}
+,{
+    "question": "What should be avoided when documenting hardware changes?",
+    "option": ["A. Clarity", "B. Incomplete records", "C. Supervisor input"],
+    "correct": 1
+}
+,{
+    "question": "Why might an organization use credit for hardware repairs?",
+    "option": ["A. To avoid vendor contact", "B. To maintain productivity", "C. To delay upgrades"],
+    "correct": 1
+}
+,{
+    "question": "What is a benefit of consulting organizational guidelines?",
+    "option": ["A. Faster hardware selection", "B. Ensuring proper authority is followed", "C. Reduced documentation"],
+    "correct": 1
+}
+,{
+    "question": "What should a hardware request add to the organization?",
+    "option": ["A. Costs only", "B. Value and functionality", "C. Delays"],
+    "correct": 1
+}
+,{
+    "question": "What is the technician’s role in the line of authority?",
+    "option": ["A. To report to a supervisor", "B. To make final decisions", "C. To bypass guidelines"],
+    "correct": 0
+}
+,{
+    "question": "What might be included in the 'Characteristics' column of the Hardware Register?",
+    "option": ["A. Employee names", "B. Technical specs of hardware", "C. Software updates"],
+    "correct": 1
+}
+,{
+    "question": "What is a key step after identifying user hardware needs?",
+    "option": ["A. Organize and record them", "B. Install hardware immediately", "C. Contact vendors directly"],
+    "correct": 0
+}
+,{
+    "question": "Why is it important to involve the right people in hardware decisions?",
+    "option": ["A. To follow organizational guidelines", "B. To reduce costs only", "C. To speed up installation"],
+    "correct": 0
+}
+
+, {
+    "question": "What might an organization do if a hardware issue affects productivity?",
+    "option": ["A. Ignore it", "B. Fix it using available resources", "C. Delay repairs indefinitely"],
+    "correct": 1
+}
+, {
+    "question": "What is a benefit of the Hardware Job Request Form?",
+    "option": ["A. Tracks hardware changes", "B. Reduces hardware costs", "C. Speeds up software updates"],
+    "correct": 0
+}
+
+,{
+    "question": "What should a technician consider when selecting hardware?",
+    "option": ["A. User requirements and compatibility", "B. Personal preferences only", "C. Vendor advertisements"],
+    "correct": 0
+}
+
+, {
+    "question": "What is a potential outcome of not documenting hardware processes?",
+    "option": ["A. Improved traceability", "B. Difficulty retrieving data", "C. Faster installations"],
+    "correct": 1
+}
+
+,{
+    "question": "What does the 'Location' field in the Hardware Register indicate?",
+    "option": ["A. Where the hardware is installed", "B. The vendor’s address", "C. The employee’s office"],
+    "correct": 0
+}
+
+,{
+    "question": "Why might a technician need to consult a supervisor?",
+    "option": ["A. For sign-off on hardware requests", "B. To install software", "C. To manage budgets"],
+    "correct": 0
+}
+
+, {
+    "question": "What is a key benefit of replacing outdated hardware?",
+    "option": ["A. Reduced compatibility", "B. Improved performance", "C. Increased costs only"],
+    "correct": 1
+}
+
+,{
+    "question": "What should be avoided when seeking supplier quotes?",
+    "option": ["A. Comparing quality", "B. Focusing on price alone", "C. Evaluating service"],
+    "correct": 1
+}
+
+, {
+    "question": "What does the Hardware Register help ensure?",
+    "option": ["A. Software updates", "B. Accurate hardware tracking", "C. Employee training"],
+    "correct": 1
+}
+
+,{
+    "question": "What is a key detail in the Hardware Job Request Form?",
+    "option": ["A. Date of request", "B. Software version", "C. Employee salary"],
+    "correct": 0
+}
+
+,{
+    "question": "Why is it important to clarify user requirements?",
+    "option": ["A. To ensure the right hardware is selected", "B. To reduce vendor contact", "C. To delay installation"],
+    "correct": 0
+}
+
+,{
+    "question": "What might happen if organizational guidelines are ignored?",
+    "option": ["A. Faster hardware selection", "B. Improper authority decisions", "C. Reduced costs"],
+    "correct": 1
+}
+, {
+    "question": "What is a benefit of involving multiple suppliers?",
+    "option": ["A. Increased competition for better deals", "B. Delayed hardware delivery", "C. Reduced documentation"],
+    "correct": 0
+}
+, {
+    "question": "What should a hardware change proposal avoid focusing on?",
+    "option": ["A. Benefits", "B. Costs alone", "C. Compatibility"],
+    "correct": 1
+}
+,{
+    "question": "What is the technician’s primary focus in Unit 1?",
+    "option": ["A. Software installation", "B. Connecting hardware components", "C. Customer feedback"],
+    "correct": 1
+}
+,{
+    "question": "What does the 'Chassis type' field in the Hardware Register refer to?",
+    "option": ["A. The hardware’s physical case", "B. The software type", "C. The employee’s role"],
+    "correct": 0
+}, {
+    "question": "Why might an organization prioritize hardware repairs?",
+    "option": ["A. To maintain employee productivity", "B. To increase vendor profits", "C. To delay upgrades"],
+    "correct": 0
+},{
+    "question": "What is a key step in the hardware acquisition process?",
+    "option": ["A. Consulting organizational guidelines", "B. Installing software", "C. Ignoring user needs"],
+    "correct": 0
+}
+,{
+    "question": "What should a technician do after organizing user requirements?",
+    "option": ["A. Pass them to the appropriate person", "B. Install hardware immediately", "C. Contact vendors directly"],
+    "correct": 0
+}
+];
+
+    let score = 0;
+    let currentQuestion = 0;
+    let userAnswers = [];
+
+    const outQuestion = document.querySelector('#question');
+    const outOption = document.querySelector('#option');
+    const outResult = document.querySelector('#result');
+    const submitBtn = document.querySelector('#submit-btn');
+    const restartBtn = document.querySelector('#restart-btn');
+
+    function display() {
+      if (currentQuestion >= questions.length) {
+        showFinalResult();
+        return;
+      }
+
+      // Display the current question
+      const questionData = questions[currentQuestion];
+      outQuestion.innerHTML = (currentQuestion + 1) + " ,"+ questionData.question;
+
+      // Display the options
+      const optionsHtml = questionData.option
+        .map((option, index) => 
+          `<label>
+            <input type="radio" name="answer" value="${index}">
+            ${option}
+          </label>`
+        )
+        .join('');
+      outOption.innerHTML = optionsHtml;
+
+      outResult.innerHTML = ""; // Clear previous result
+    }
+
+    function next() {
+      const selectedOption = document.querySelector('input[name="answer"]:checked');
+      if (!selectedOption) {
+        outResult.innerHTML = "<span style='color: red;'>Please select an answer!</span>";
+        return;
+      }
+
+      const answer = parseInt(selectedOption.value);
+      userAnswers.push({ 
+        question: questions[currentQuestion].question,
+        selected: answer,
+        correct: questions[currentQuestion].correct,
+        selectedOption: questions[currentQuestion].option[answer],
+        correctOption: questions[currentQuestion].option[questions[currentQuestion].correct]
+      });
+
+      if (answer === questions[currentQuestion].correct) {
+        score++;
+        outResult.innerHTML = "<span style='color: green;'>Correct!</span>";
+      } else {
+        outResult.innerHTML = "<span style='color: red;'>Wrong answer.</span>";
+      }
+
+      currentQuestion++;
+      display();
+    }
+
+    function showFinalResult() {
+      outQuestion.innerHTML = "Quiz completed!";
+      outOption.innerHTML = "";
+      outResult.innerHTML = `
+        <h3>Your final score is: ${score}/${questions.length}</h3>
+        <h4>Results:</h4>
+        <ul>
+          ${userAnswers.map(answer => `
+            <li>
+              <strong>Question:</strong> ${answer.question}<br>
+              <strong>Your Answer:</strong> ${answer.selectedOption || "No answer"}
+             ${answer.selected === answer.correct ? " ✔️" : " ❌"}
+            <br>
+              <strong>Correct Answer:</strong> ${answer.correctOption}
+            </li>
+          `).join('')}
+        </ul>
+      `;
+      submitBtn.style.display = "none";
+      restartBtn.style.display = "inline-block";
+    }
+
+    function restart() {
+      score = 0;
+      currentQuestion = 0;
+      userAnswers = [];
+      submitBtn.style.display = "inline-block";
+      restartBtn.style.display = "none";
+      display();
+    }
+
+    // Initial display
+    display();
+  </script>
+</body>
+</html>
